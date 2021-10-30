@@ -5,7 +5,7 @@ import java.util.List;
 import com.proyecto.models.Productos;
 
 public interface ProductosServices {
-
+ 
     Productos registrar(Productos productos);
 	
     Productos actualizar(Productos productos);

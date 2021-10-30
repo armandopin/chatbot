@@ -16,7 +16,7 @@ import com.ibm.watson.assistant.v2.model.MessageStatelessOptions;
 @RestController
 public class AssistantRestController {
 
-	@Value("${ibm.assistant.apikey}")
+	@Value("${ibm.assistant.apikey}") 
 	private String assistantApikey;
 
 	@Value("${ibm.assistant.version.date}")

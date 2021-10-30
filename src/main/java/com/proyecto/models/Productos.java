@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "productos")
 public class Productos {
 
-	@Id
+	@Id 
 	private int cod_prod;
 	
 	@Column(name = "desc_prod", nullable = false, length = 200)

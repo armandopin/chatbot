@@ -1,5 +1,5 @@
 package com.proyecto.watson.assistan;
-
+ 
 public class Input {
 
 	private String text;

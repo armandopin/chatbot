@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "clientes")
 public class Clientes {
-
+ 
 	@Id
 	private int cod_cli;
 	

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.proyecto.models.Proveedores;
 
-public interface ProveedoresServices {
+public interface ProveedoresServices { 
 
     Proveedores registrar(Proveedores proveedores);
 	

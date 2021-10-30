@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DetPedido")
 public class DetallesPedidos {
-
+ 
 	@Id
 	@ManyToOne
 	private Pedidos pedidos;

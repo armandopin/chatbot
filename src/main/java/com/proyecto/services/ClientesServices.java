@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.proyecto.models.Clientes;
 
-public interface ClientesServices {
+public interface ClientesServices { 
 
 	Clientes registrar(Clientes clientes);
 	
