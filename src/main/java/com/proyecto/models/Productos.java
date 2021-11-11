@@ -30,6 +30,9 @@ public class Productos {
 	@ManyToOne
 	private Categorias categorias;
 	
+	@ManyToOne
+	private Proveedores proveedores;
+	
 	@Column(name = "stk_prod", precision = 10, scale = 2)
 	private int stk_prod;
 

@@ -24,7 +24,7 @@ public class Pedidos {
  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cod_pedido;
+	private int codpedido;
 	
 	@Column(name = "desc_pedido", nullable = false, length = 200)
 	private String desc_pedido;
@@ -36,10 +36,7 @@ public class Pedidos {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fecEntreg_pedido")
 	private Date fecEntreg_pedido;
-	
-	@ManyToOne
-	private Categorias categorias;
-	
+		
 	@ManyToOne
 	private Clientes clientes;
 	

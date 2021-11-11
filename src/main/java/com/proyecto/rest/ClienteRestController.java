@@ -20,7 +20,7 @@ import com.proyecto.services.ClientesServices;
 
 
 @RestController
-@RequestMapping("/api/empleados")
+@RequestMapping("/api/clientes")
 public class ClienteRestController {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class ClienteRestController {
 		return clientesservices.obtenerClientes();
 	}
 	
-	@GetMapping("{cod_pedido}")
+	@GetMapping("{cod_cli}")
 	public Clientes obtenerXClientes(@PathVariable int cod_cliente){
 		return clientesservices.obtenerPorId(cod_cliente).get();
 	}

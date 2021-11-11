@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.proyecto.models.Pedidos;
 import com.proyecto.repository.PedidosRepository;
 import com.proyecto.services.PedidosServices;
 
+@Service
 public class PedidosServicesImple implements PedidosServices {
 
 	@Autowired

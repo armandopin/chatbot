@@ -20,9 +20,12 @@ public class DetallesPedidos {
 	@ManyToOne
 	private Pedidos pedidos;
 	
+	@ManyToOne
+	private Productos productos;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private double cod_ped;
+	private double cod_detped;
 	
 	@Column(name = "precio_ped", precision = 10, scale = 2)
 	private double precio_ped;

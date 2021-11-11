@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.proyecto.models.Pedidos;
 import com.proyecto.models.Proveedores;
 import com.proyecto.services.ProveedoresServices;
 

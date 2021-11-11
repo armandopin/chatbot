@@ -47,7 +47,7 @@ public class PedidoRestController {
 	
 	@PutMapping("{cod_pedido}")
 	public ResponseEntity<Object>actualizar(@RequestBody Pedidos pedidos, @PathVariable int cod_pedido){
-		pedidos.setCod_pedido(cod_pedido);
+		pedidos.setCodpedido(cod_pedido);
 		pedidoservice.actualizar(pedidos);
 		return ResponseEntity.noContent().build();
 	}

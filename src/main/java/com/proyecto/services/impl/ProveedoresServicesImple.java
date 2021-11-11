@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.proyecto.models.Proveedores;
 import com.proyecto.repository.ProveedoresRepository;
 import com.proyecto.services.ProveedoresServices;
 
+@Service
 public class ProveedoresServicesImple implements ProveedoresServices{
 	
 	@Autowired

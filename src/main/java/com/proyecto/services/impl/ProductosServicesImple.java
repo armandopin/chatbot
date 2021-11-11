@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.proyecto.models.Productos;
 import com.proyecto.repository.ProductosRepository;
 import com.proyecto.services.ProductosServices;
 
+@Service
 public class ProductosServicesImple implements ProductosServices{
 	
 	@Autowired
