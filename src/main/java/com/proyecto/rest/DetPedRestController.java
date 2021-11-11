@@ -21,7 +21,7 @@ public class DetPedRestController {
 	
 	@PutMapping("{cod_pedido}")
 	public ResponseEntity<Object>actualizar(@RequestBody DetallesPedidos detpedidos, @PathVariable int cod_pedido){
-		detpedidos.setId(cod_pedido);
+		detpedidos.setCod_ped(cod_pedido);
 		detpedservice.actualizar(detpedidos);
 		return ResponseEntity.noContent().build();
 	}

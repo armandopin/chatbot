@@ -41,13 +41,13 @@ public class PedidoRestController {
 		Pedidos pedidoGuardado = pedidoservice.registrar(pedidos);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_pedido}")
-				.buildAndExpand(pedidoGuardado.getId()).toUri();
+				.buildAndExpand(pedidoGuardado.getClass()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping("{cod_pedido}")
 	public ResponseEntity<Object>actualizar(@RequestBody Pedidos pedidos, @PathVariable int cod_pedido){
-		pedidos.setId(cod_pedido);
+		pedidos.setCod_pedido(cod_pedido);
 		pedidoservice.actualizar(pedidos);
 		return ResponseEntity.noContent().build();
 	}

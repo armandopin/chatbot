@@ -43,8 +43,4 @@ public class Pedidos {
 	@ManyToOne
 	private Clientes clientes;
 	
-	@ManyToOne
-	private Trabajadores trabajadores;
-
-	
 }

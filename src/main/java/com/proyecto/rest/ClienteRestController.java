@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyecto.models.Clientes;
-import com.proyecto.models.Pedidos;
 import com.proyecto.services.ClientesServices;
 
 
@@ -42,13 +41,13 @@ public class ClienteRestController {
 		Clientes clienteGuardado = clientesservices.registrar(clientes);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_cliente}")
-				.buildAndExpand(clienteGuardado.getId()).toUri();
+				.buildAndExpand(clienteGuardado.getCod_cli()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping("{cod_cliente}")
 	public ResponseEntity<Object>actualizar(@RequestBody Clientes clientes, @PathVariable int cod_cliente){
-		clientes.setId(cod_cliente);
+		clientes.setCod_cli(cod_cliente);
 		clientesservices.actualizar(clientes);
 		return ResponseEntity.noContent().build();
 	}

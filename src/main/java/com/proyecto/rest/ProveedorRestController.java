@@ -41,13 +41,13 @@ public class ProveedorRestController {
 		Proveedores proveedorGuardado = proveedorservice.registrar(proveedores);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_prov}")
-				.buildAndExpand(proveedorGuardado.getId()).toUri();
+				.buildAndExpand(proveedorGuardado.getCod_prov()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping("{cod_prov}")
 	public ResponseEntity<Object>actualizar(@RequestBody Proveedores proveedores, @PathVariable int cod_prov){
-		proveedores.setId(cod_prov);
+		proveedores.setCod_prov(cod_prov);
 		proveedorservice.actualizar(proveedores);
 		return ResponseEntity.noContent().build();
 	}

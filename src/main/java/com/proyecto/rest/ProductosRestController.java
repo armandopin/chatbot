@@ -41,13 +41,13 @@ public class ProductosRestController {
 		Productos productoGuardado = productoservice.registrar(productos);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_prod}")
-				.buildAndExpand(productoGuardado.getId()).toUri();
+				.buildAndExpand(productoGuardado.getCod_prod()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
 	@PutMapping("{cod_prod}")
 	public ResponseEntity<Object>actualizar(@RequestBody Productos productos, @PathVariable int cod_prod){
-		productos.setId(cod_prod);
+		productos.setCod_prod(cod_prod);
 		productoservice.actualizar(productos);
 		return ResponseEntity.noContent().build();
 	}
