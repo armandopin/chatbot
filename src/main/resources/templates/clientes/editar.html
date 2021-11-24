@@ -2,9 +2,83 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Editar Cliente</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
+
+<section class="content">
+           <div class="card">
+
+           <div class="card-body">
+           
+           <h4 class="card-title">Editar Cliente</h4>
+           
+           <form th:action="@{/clientes/actualizar}" th:method="post"
+				 th:object="${clientes}">
+				 
+		   <input type="hidden" th:field="*{cod_cli}"> 	 
+		   <div class="form-row">
+		       
+		      <div class="col-md-6">
+					<div class="form-group">
+						<label for="inputNombre">NOMBRE DEL CLIENTE :</label>
+						<input type="text" th:field="*{nom_cli}" class="form-control"
+						placeholder="Nombre" maxlength="50"> <i
+						class="form-group__bar"></i>
+					</div>
+			 </div>
+			 
+			 <div class="col-md-6">
+					<div class="form-group">
+							<label for="inputApellido">APELLIDO DEL CLIENTE : </label>
+								<input type="text" th:field="*{ape_cli}" class="form-control"
+									placeholder="Apellido" maxlength="50"> <i
+									class="form-group__bar"></i>
+					</div>
+			</div>
+			
+			<div class="col-md-6">
+					<div class="form-group">
+							<label for="inputDireccion">DIRECCION : </label>
+								<input type="text" th:field="*{direc_cli}" class="form-control"
+									placeholder="Direccion" maxlength="50"> <i
+									class="form-group__bar"></i>
+					</div>
+			</div>
+			
+			<div class="col-md-6">
+					<div class="form-group">
+							<label for="inputCorreo">CORREO : </label>
+								<input type="text" th:field="*{correo_cli}" class="form-control"
+									placeholder="Correo" maxlength="50"> <i
+									class="form-group__bar"></i>
+					</div>
+			</div>
+			
+			<div class="col-md-6">
+				  <div class="form-group">
+							<label for="inputTelefono">TELEFONO : </label>
+								<input type="text" th:field="*{telef_cli}" class="form-control"
+									placeholder="Telefono" maxlength="50"> <i
+									class="form-group__bar"></i>
+			      </div>
+			</div>
+		   
+		   
+	     	   </div >
+           
+            </form >
+           
+          </div >
+                      
+        </div >
+
+</section >
+
+
+
+
 
 </body>
 </html>

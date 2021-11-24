@@ -2,9 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Clientes</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
 </head>
 <body>
+<section class="content">
+        <div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Clientes</h4>
+				<div class="form-row">
+					<div class="col-m-6">
+						<div class="form-group">
+							<a href="/clientes/nuevo" class="btn btn-primary">Nuevo
+								Cliente</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista de Clientes</h4>
+
+				<div class="table-responsive">
+					<table id="idTableCliente" class="table table-dark">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre de Cliente</th>
+								<th>Apellido de Cliente</th>
+								<th>Direccion</th>
+								<th>Correo</th>
+								<th>Telefono</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="producto : ${listarProductos}">
+								<tr>
+									<td th:text="${cliente.cod_cli}"></td>
+									<td th:text="${cliente.nom_cli}"></td>
+									<td th:text="${cliente.ape_cli}"></td>
+									<td th:text="${cliente.direc_cli}"></td>
+									<td th:text="${cliente.correo_cli}"></td>
+									<td th:text="${cliente.telef_cli}"></td>
+									<td><a class="btn btn-success" 
+										th:href="@{/clientes/editar/{id}(id=${cliente.cod_cli})}"> <i
+											class="zmdi zmdi-edit zmdi-hc-fw" th:text="Editar"></i>
+
+									</a> <a class="btn btn-danger" th:href="@{/clientes/eliminar/{id}(id=${cliente.cod_cli})}"> 
+									<i class="zmdi zmdi-delete zmdi-hc-fw" th:text="Eliminar"></i>
+
+									</a></td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+
+					<div class="table-responsive"></div>
+				</div>
+			</div>
+		</div>
+</section>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			$("#idTableCliente").DataTable();
+		});			
+	</script>
 
 </body>
 </html>
