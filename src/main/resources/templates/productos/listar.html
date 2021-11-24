@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Productos</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<section class="content">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Productos</h4>
+				<div class="form-row">
+					<div class="col-m-6">
+						<div class="form-group">
+							<a href="/productos/nuevo" class="btn btn-primary">Nuevo
+								Producto</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Lista de Productos</h4>
+
+				<div class="table-responsive">
+					<table id="idTableProducto" class="table table-dark">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Descripcion</th>
+								<th>Precio</th>
+								<th>Categoria</th>
+								<th>Proeveedor</th>
+								<th>Stock</th>
+							</tr>
+						</thead>
+						<tbody>
+							<th:block th:each="producto : ${listarProductos}">
+								<tr>
+									<td th:text="${producto.cod_prod}"></td>
+									<td th:text="${producto.desc_prod}"></td>
+									<td th:text="${producto.prec_prod}"></td>
+									<td th:text="${producto.categorias.nom_cat}"></td>
+									<td th:text="${producto.proveedores.nom_prov}"></td>
+									<td th:text="${producto.stk_prod}"></td>
+									<td><a class="btn btn-success" 
+										th:href="@{/productos/editar/{id}(id=${producto.cod_prod})}"> <i
+											class="zmdi zmdi-edit zmdi-hc-fw" th:text="Editar"></i>
+
+									</a> <a class="btn btn-danger" th:href="@{/productos/eliminar/{id}(id=${producto.cod_prod})}"> 
+									<i class="zmdi zmdi-delete zmdi-hc-fw" th:text="Eliminar"></i>
+
+									</a></td>
+								</tr>
+							</th:block>
+						</tbody>
+					</table>
+
+					<div class="table-responsive"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			$("#idTableProducto").DataTable();
+		});			
+	</script>
+
+</body>
+</html>
