@@ -2,9 +2,92 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Insertar Pedido</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
 </head>
 <body>
+<section class="content">
+		<div class="card">
+			<div class="card-body">
+
+				<h4 class="card-title">Nuevo Pedido</h4>
+
+				<form th:action="@{/pedido/crear}" th:method="post"
+					th:object="${pedido}">
+					
+					<div class="form-row">
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="inputDescrip">DESCRIPCION:</label>
+								<input type="text" th:field="*{desc_prod}" class="form-control"
+									placeholder="Nombre Producto" maxlength="50"> <i
+									class="form-group__bar"></i>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="inputFecha">FECHA DE PEDIDO: </label>
+								<input type="text" th:field="*{fec_pedido}" class="form-control"
+									placeholder="Fecha" maxlength="50"> <i
+									class="form-group__bar"></i>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="inputFechaEntre">FECHA DE ENTREGA: </label>
+								<input type="text" th:field="*{fecEntreg_pedido}" class="form-control"
+									placeholder="Fecha Entrega" maxlength="50"> <i
+									class="form-group__bar"></i>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inputCategoria">CATEGORIA :</label>
+								<select th:field="*{categorias.cod_cat}" class="form-control">
+									<option value="-1">Seleccione</option>
+									<option th:each="categorias : ${listaCategoria}"
+										th:value="${categorias.cod_cat}"
+										th:text="${categorias.nom_cat}" />
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inputCliente">CLIENTE :</label>
+								<select th:field="*{clientes.cod_cli}" class="form-control">
+									<option value="-1">Seleccione</option>
+									<option th:each="clientes : ${listaCliente}"
+										th:value="${clientes.cod_cli}"
+										th:text="${clientes.nom_cli]}" />
+
+								</select>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Registrar</button>
+								<a href="/pedido" class="btn btn-danger">Cancelar</a>
+							</div>
+						</div>
+					</div>
+
+
+				</form>
+
+			</div>
+
+		</div>
+	</section>
+
 
 </body>
 </html>
