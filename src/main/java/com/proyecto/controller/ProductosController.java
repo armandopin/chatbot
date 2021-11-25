@@ -20,7 +20,7 @@ public class ProductosController {
 	
 	@GetMapping
 	public String listProductos(Model map) {
-		map.addAttribute("ListarProductos", productoservice.obtenerProductos());
+		map.addAttribute("ListarProductos", productoservice.listar());
 		return "productos/listar";
 	}
 	
@@ -36,9 +36,9 @@ public class ProductosController {
 		return "redirect:/productos";
 	}
 	
-	@GetMapping("/editar{cod_prod}")
-	public String productoEditar(@ModelAttribute("cod_prod") int cod_prod, Model map) {
-		map.addAttribute("producto", productoservice.obtenerPorId(cod_prod));
+	@GetMapping("/editar{idpro}")
+	public String productoEditar(@ModelAttribute("idpro") Long idpro, Model map) {
+		map.addAttribute("producto", productoservice.obtenerPorId(idpro));
 		return "productos/editar";
 	}
 	
@@ -48,9 +48,9 @@ public class ProductosController {
 		return "redirect:/productos";
 	}
 	
-	@GetMapping("/eliminar{cod_prod}")
-	public String pedidoEliminar(@ModelAttribute("cod_prod") int cod_prod) {
-		productoservice.obtenerPorId(cod_prod);
+	@GetMapping("/eliminar{idpro}")
+	public String pedidoEliminar(@ModelAttribute("idpro") Long idpro) {
+		productoservice.obtenerPorId(idpro);
 		return "productos/productos";
 	}
 

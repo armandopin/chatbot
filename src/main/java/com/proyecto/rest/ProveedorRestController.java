@@ -27,33 +27,33 @@ public class ProveedorRestController {
 	
 	@GetMapping
 	public List<Proveedores> listaProveedores(){
-		return proveedorservice.obtenerProveedores();
+		return proveedorservice.listar();
 	}
 	
-	@GetMapping("{cod_prov}")
-	public Proveedores obtenerProveedores(@PathVariable int cod_prov){
-		return proveedorservice.obtenerPorId(cod_prov).get();
+	@GetMapping("{idprov}")
+	public Proveedores obtenerProveedores(@PathVariable Long idprov){
+		return proveedorservice.obtenerPorId(idprov).get();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Object>registrar(@RequestBody Proveedores proveedores){
 		Proveedores proveedorGuardado = proveedorservice.registrar(proveedores);
 		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_prov}")
-				.buildAndExpand(proveedorGuardado.getCod_prov()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idprov}")
+				.buildAndExpand(proveedorGuardado.getIdprov()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
-	@PutMapping("{cod_prov}")
-	public ResponseEntity<Object>actualizar(@RequestBody Proveedores proveedores, @PathVariable int cod_prov){
-		proveedores.setCod_prov(cod_prov);
+	@PutMapping("{idprov}")
+	public ResponseEntity<Object>actualizar(@RequestBody Proveedores proveedores, @PathVariable Long idprov){
+		proveedores.setIdprov(idprov);
 		proveedorservice.actualizar(proveedores);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@DeleteMapping("{cod_prov}")
-	public void eliminar(@PathVariable int cod_prov) {
-		proveedorservice.eliminar(cod_prov);
+	@DeleteMapping("{idprov}")
+	public void eliminar(@PathVariable Long idprov) {
+		proveedorservice.eliminar(idprov);
 	}
 
 }

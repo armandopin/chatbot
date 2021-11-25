@@ -17,21 +17,21 @@ import lombok.Setter;
 @Setter
 public class DetallesPedidos {
  
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long iddetped;
+	
 	@ManyToOne
 	private Pedidos pedidos;
 	
 	@ManyToOne
-	private Productos productos;
+	private Productos productos;	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private double cod_detped;
+	@Column(name = "precio", precision = 10, scale = 2)
+	private double precio;
 	
-	@Column(name = "precio_ped", precision = 10, scale = 2)
-	private double precio_ped;
-	
-	@Column(name = "cantidad_ped", precision = 10, scale = 2)
-	private int cantidad_ped;
+	@Column(name = "cantidad", precision = 10, scale = 2)
+	private int cantidad;
 	
 	@Column(name = "sub_total", precision = 10, scale = 10)
 	private double sub_total;

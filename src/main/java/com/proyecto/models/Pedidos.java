@@ -24,20 +24,20 @@ public class Pedidos {
  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int codpedido;
+	private Long idped;
 	
-	@Column(name = "desc_pedido", nullable = false, length = 200)
-	private String desc_pedido;
+	@ManyToOne
+	private Clientes clientes;
+	
+	@Column(name = "descripcion", nullable = false, length = 200)
+	private String descripcion;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fec_pedido")
-	private LocalDate fec_pedido;
+	private LocalDate fecpedido;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fecEntreg_pedido")
-	private Date fecEntreg_pedido;
-		
-	@ManyToOne
-	private Clientes clientes;
+	@Column(name = "fecEntrega")
+	private Date fecEntrega;
 	
 }

@@ -19,13 +19,13 @@ public class Productos {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cod_prod;
+	private Long idpro;
 	
-	@Column(name = "desc_prod", nullable = false, length = 200)
-	private String desc_prod;
+	@Column(name = "descripcion", nullable = false, length = 200)
+	private String descripcion;
 	
-	@Column(name = "prec_prod", precision = 10, scale = 2)
-	private double prec_prod;
+	@Column(name = "precio", precision = 10, scale = 2)
+	private double precio;
 	
 	@ManyToOne
 	private Categorias categorias;
@@ -33,7 +33,7 @@ public class Productos {
 	@ManyToOne
 	private Proveedores proveedores;
 	
-	@Column(name = "stk_prod", precision = 10, scale = 2)
-	private int stk_prod;
+	@Column(name = "stock", precision = 10, scale = 2)
+	private int stock;
 
 }

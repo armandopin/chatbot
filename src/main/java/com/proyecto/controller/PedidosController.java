@@ -21,37 +21,37 @@ public class PedidosController {
 	
 	@GetMapping
 	public String listPedidos(Model map) {
-		map.addAttribute("ListarPedidos", pedidoservice.obtenerPedidos());
-		return "pedidos/listar";
+		map.addAttribute("ListarPedidos", pedidoservice.listar());
+		return "pedido/listar";
 	}
 	
 	@GetMapping("/nuevo")
 	public String pedidoNuevo(Model map) {
 		map.addAttribute("pedido", new Pedidos());
-		return "pedidos/nuevo";
+		return "pedido/nuevo";
 	}
 	
 	@PostMapping("/crear")
 	public String pedidoCrear(@ModelAttribute("pedido") Pedidos pedido) {
 		pedidoservice.registrar(pedido);
-		return "redirect:/pedidos";
+		return "redirect:/pedido";
 	}
 	
-	@GetMapping("/editar{cod_pedido}")
-	public String pedidoEditar(@ModelAttribute("cod_pedido") int cod_pedido, Model map) {
-		map.addAttribute("pedido", pedidoservice.obtenerPorId(cod_pedido));
-		return "pedidos/editar";
+	@GetMapping("/editar{idped}")
+	public String pedidoEditar(@ModelAttribute("idped") Long idped, Model map) {
+		map.addAttribute("pedido", pedidoservice.obtenerPorId(idped));
+		return "pedido/editar";
 	}
 	
 	@PostMapping("/actualizar")
 	public String pedidoActualizar(@ModelAttribute("pedido") Pedidos pedido) {
 		pedidoservice.actualizar(pedido);
-		return "redirect:/pedidos";
+		return "redirect:/pedido";
 	}
 	
-	@GetMapping("/eliminar{cod_pedido}")
-	public String pedidoEliminar(@ModelAttribute("cod_pedido") int cod_pedido) {
-		pedidoservice.obtenerPorId(cod_pedido);
-		return "pedidos/pedidos";
+	@GetMapping("/eliminar{idped}")
+	public String pedidoEliminar(@ModelAttribute("idped") Long idped) {
+		pedidoservice.obtenerPorId(idped);
+		return "pedidos/pedido";
 	}
 }

@@ -14,37 +14,39 @@ import com.proyecto.services.ProductosServices;
 public class ProductosServicesImple implements ProductosServices{
 	
 	@Autowired
-	private ProductosRepository productorepository;
+	private ProductosRepository repository;
 
 	@Override
 	public Productos registrar(Productos productos) {
-		return productorepository.save(productos);
+		return repository.save(productos);
 	}
 
 	@Override
 	public Productos actualizar(Productos productos) {
-		return productorepository.save(productos);
+		return repository.save(productos);
 	}
 
 	@Override
-	public Integer eliminar(int cod_prod) {
-		productorepository.deleteById(cod_prod);
-		Optional<Productos> ped = productorepository.findById(cod_prod);
-		if (ped.isEmpty()) {
+	public Integer eliminar(Long idpro) {
+		repository.deleteById(idpro);
+		Optional<Productos>cli = repository.findById(idpro);
+		if (cli.isPresent()) {
 			return -1;
 		}
 		return 1;
 	}
 
 	@Override
-	public Optional<Productos> obtenerPorId(int cod_prod) {
-		return productorepository.findById(cod_prod);
+	public List<Productos> listar() {
+		return (List<Productos>) repository.findAll();
 	}
 
 	@Override
-	public List<Productos> obtenerProductos() {
-		return (List<Productos>) productorepository.findAll();
+	public Optional<Productos> obtenerPorId(Long idpro) {
+		return repository.findById(idpro);
 	}
+
+	
 	
 	
 

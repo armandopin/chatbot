@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,33 +27,33 @@ public class PedidoRestController {
 	
 	@GetMapping
 	public List<Pedidos> listaPedidos(){
-		return pedidoservice.obtenerPedidos();
+		return pedidoservice.listar();
 	}
 	
-	@GetMapping("{cod_pedido}")
-	public Pedidos obtenerPedidos(@PathVariable int cod_pedido){
-		return pedidoservice.obtenerPorId(cod_pedido).get();
+	@GetMapping("{idped}")
+	public Pedidos obtenerPedidos(@PathVariable Long idped){
+		return pedidoservice.obtenerPorId(idped).get();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Object>registrar(@RequestBody Pedidos pedidos){
 		Pedidos pedidoGuardado = pedidoservice.registrar(pedidos);
 		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_pedido}")
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idped}")
 				.buildAndExpand(pedidoGuardado.getClass()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
-	@PutMapping("{cod_pedido}")
-	public ResponseEntity<Object>actualizar(@RequestBody Pedidos pedidos, @PathVariable int cod_pedido){
-		pedidos.setCodpedido(cod_pedido);
+	@PutMapping("{idped}")
+	public ResponseEntity<Object>actualizar(@RequestBody Pedidos pedidos, @PathVariable Long idped){
+		pedidos.setIdped(idped);
 		pedidoservice.actualizar(pedidos);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@DeleteMapping("{cod_pedido}")
-	public void eliminar(@PathVariable int cod_pedido) {
-		pedidoservice.eliminar(cod_pedido);
+	@DeleteMapping("{idped}")
+	public void eliminar(@PathVariable Long idped) {
+		pedidoservice.eliminar(idped);
 	}
 
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.models.Proveedores;
 
 @Repository
-public interface ProveedoresRepository extends CrudRepository<Proveedores,Integer>{
+public interface ProveedoresRepository extends CrudRepository<Proveedores,Long>{
 
 }

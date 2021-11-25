@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.models.DetallesPedidos;
 
 @Repository
-public interface DetPedidoRepository extends CrudRepository<DetallesPedidos, Integer>{
+public interface DetPedidoRepository extends CrudRepository<DetallesPedidos, Long>{
 
-	public abstract List<DetallesPedidos> findByPedidos_codpedido(int cod_pedido);
+	public abstract List<DetallesPedidos> findByPedidos(int idpedido);
 
 }

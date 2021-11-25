@@ -18,10 +18,10 @@ public class Categorias {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cod_cat;
+	private Long idcat;
 	
-	@Column(name = "nom_cat", nullable = false, length = 200)
-	private String nom_cat;
+	@Column(name = "descripcion", nullable = false, length = 200)
+	private String descripcion;
 
 
 }

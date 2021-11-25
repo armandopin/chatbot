@@ -1,6 +1,6 @@
 package com.proyecto.rest;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.models.DetallesPedidos;
-import com.proyecto.models.Pedidos;
 import com.proyecto.services.DetPedServices;
 
 @RestController
@@ -22,14 +21,14 @@ public class DetPedRestController {
 	@Autowired
 	private DetPedServices detpedservice;
 	
-	@GetMapping("{cod_pedido}")
-	public List<DetallesPedidos> listardet(@PathVariable int cod_pedido){
-		return detpedservice.findByCod_pedido(cod_pedido);
+	@GetMapping("{idped}")
+	public Optional<DetallesPedidos> listardet(@PathVariable Long idped){
+		return detpedservice.obtenerPorId(idped);
 	}
 		
-	@PutMapping("{cod_pedido}")
-	public ResponseEntity<Object>actualizar(@RequestBody DetallesPedidos detpedidos, @PathVariable int cod_pedido){
-		detpedidos.setCod_detped(cod_pedido);
+	@PutMapping("{idped}")
+	public ResponseEntity<Object>actualizar(@RequestBody DetallesPedidos detpedidos, @PathVariable Long idped){
+		detpedidos.setIddetped(idped);
 		detpedservice.actualizar(detpedidos);
 		return ResponseEntity.noContent().build();
 	}

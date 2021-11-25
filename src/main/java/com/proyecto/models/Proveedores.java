@@ -19,15 +19,15 @@ public class Proveedores {
  
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cod_prov;
+	private Long idprov;
 	
-	@Column(name = "nom_prov", nullable = false, length = 200)
-	private String nom_prov;
+	@Column(name = "razons", nullable = false, length = 200)
+	private String razons;
 	
-	@Column(name = "ape_prov", nullable = false, length = 200)
-	private String ape_prov;
+	@Column(name = "ruc", nullable = false, length = 11)
+	private String ruc;
 	
-	@Column(name = "dni_prov", nullable = false, length = 200)
-	private String dni_prov;
+	@Column(name = "direccion", nullable = false, length = 100)
+	private String direccion;
 
 }

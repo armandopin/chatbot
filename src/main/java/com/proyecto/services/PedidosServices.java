@@ -7,14 +7,10 @@ import com.proyecto.models.Pedidos;
 
 public interface PedidosServices {
  
-    Pedidos registrar(Pedidos pedidos);
-	
-    Pedidos actualizar(Pedidos pedidos);
-	
-	Integer eliminar(int cod_pedido);
-	
-	Optional<Pedidos>obtenerPorId(int cod_pedido);
-	
-	List<Pedidos> obtenerPedidos();
+    Pedidos registrar(Pedidos pedidos);	
+    Pedidos actualizar(Pedidos pedidos);	
+	Integer eliminar(Long idped);
+	List<Pedidos> listar();
+	Optional<Pedidos>obtenerPorId(Long idped);
 	
 }

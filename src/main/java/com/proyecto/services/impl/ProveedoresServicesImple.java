@@ -14,36 +14,38 @@ import com.proyecto.services.ProveedoresServices;
 public class ProveedoresServicesImple implements ProveedoresServices{
 	
 	@Autowired
-	private ProveedoresRepository proveedoresRepository;
+	private ProveedoresRepository repository;
 
 	@Override
 	public Proveedores registrar(Proveedores proveedores) {
-		return proveedoresRepository.save(proveedores);
+		return repository.save(proveedores);
 	}
 
 	@Override
 	public Proveedores actualizar(Proveedores proveedores) {
-		return proveedoresRepository.save(proveedores);
+		return repository.save(proveedores);
 	}
 
 	@Override
-	public Integer eliminar(int cod_prov) {
-		proveedoresRepository.deleteById(cod_prov);
-		Optional<Proveedores> ped = proveedoresRepository.findById(cod_prov);
-		if (ped.isEmpty()) {
+	public Integer eliminar(Long idprov) {
+		repository.deleteById(idprov);
+		Optional<Proveedores>cli = repository.findById(idprov);
+		if (cli.isPresent()) {
 			return -1;
 		}
 		return 1;
 	}
 
 	@Override
-	public Optional<Proveedores> obtenerPorId(int cod_prov) {
-		return proveedoresRepository.findById(cod_prov);
+	public List<Proveedores> listar() {
+		return (List<Proveedores>) repository.findAll();
 	}
 
 	@Override
-	public List<Proveedores> obtenerProveedores() {
-		return (List<Proveedores>) proveedoresRepository.findAll();
+	public Optional<Proveedores> obtenerPorId(Long idprov) {
+		return repository.findById(idprov);
 	}
+
+	
 
 }

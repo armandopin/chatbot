@@ -7,14 +7,9 @@ import com.proyecto.models.Clientes;
 
 public interface ClientesServices { 
 
-	Clientes registrar(Clientes clientes);
-	
-	Clientes actualizar(Clientes clientes);
-	
-	Integer eliminar(int cod_cli);
-	
-	Optional<Clientes>obtenerPorId(int cod_cli);
-	
-	List<Clientes> obtenerClientes();
-	
+	Clientes registrar(Clientes clientes);	
+	Clientes actualizar(Clientes clientes);	
+	Integer eliminar(Long idcli);
+	List<Clientes> listar();
+	Optional<Clientes>obtenerPorId(Long idcli);	
 }

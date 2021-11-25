@@ -28,33 +28,33 @@ public class ClienteRestController {
 	
 	@GetMapping
 	public List<Clientes> listaPedidos(){
-		return clientesservices.obtenerClientes();
+		return clientesservices.listar();
 	}
 	
-	@GetMapping("{cod_cli}")
-	public Clientes obtenerXClientes(@PathVariable int cod_cliente){
-		return clientesservices.obtenerPorId(cod_cliente).get();
+	@GetMapping("{idcli}")
+	public Clientes obtenerXClientes(@PathVariable Long idcli){
+		return clientesservices.obtenerPorId(idcli).get();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Object>registrar(@RequestBody Clientes clientes){
 		Clientes clienteGuardado = clientesservices.registrar(clientes);
 		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_cliente}")
-				.buildAndExpand(clienteGuardado.getCod_cli()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idcli}")
+				.buildAndExpand(clienteGuardado.getIdcli()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
-	@PutMapping("{cod_cliente}")
-	public ResponseEntity<Object>actualizar(@RequestBody Clientes clientes, @PathVariable int cod_cliente){
-		clientes.setCod_cli(cod_cliente);
+	@PutMapping("{idcli}")
+	public ResponseEntity<Object>actualizar(@RequestBody Clientes clientes, @PathVariable Long idcli){
+		clientes.setIdcli(idcli);
 		clientesservices.actualizar(clientes);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@DeleteMapping("{cod_cliente}")
-	public void eliminar(@PathVariable int cod_cliente) {
-		clientesservices.eliminar(cod_cliente);
+	@DeleteMapping("{idcli}")
+	public void eliminar(@PathVariable Long idcli) {
+		clientesservices.eliminar(idcli);
 	}
 	
 }

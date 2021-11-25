@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.proyecto.models.Pedidos;
 import com.proyecto.models.Productos;
 import com.proyecto.services.ProductosServices;
 
@@ -28,33 +27,33 @@ public class ProductosRestController {
 	
 	@GetMapping
 	public List<Productos> listaProductos(){
-		return productoservice.obtenerProductos();
+		return productoservice.listar();
 	}
 	
-	@GetMapping("{cod_prod}")
-	public Productos obtenerProductos(@PathVariable int cod_prod){
-		return productoservice.obtenerPorId(cod_prod).get();
+	@GetMapping("{idpro}")
+	public Productos obtenerProductos(@PathVariable Long idpro){
+		return productoservice.obtenerPorId(idpro).get();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Object>registrar(@RequestBody Productos productos){
 		Productos productoGuardado = productoservice.registrar(productos);
 		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{cod_prod}")
-				.buildAndExpand(productoGuardado.getCod_prod()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idpro}")
+				.buildAndExpand(productoGuardado.getIdpro()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
-	@PutMapping("{cod_prod}")
-	public ResponseEntity<Object>actualizar(@RequestBody Productos productos, @PathVariable int cod_prod){
-		productos.setCod_prod(cod_prod);
+	@PutMapping("{idpro}")
+	public ResponseEntity<Object>actualizar(@RequestBody Productos productos, @PathVariable Long idpro){
+		productos.setIdpro(idpro);
 		productoservice.actualizar(productos);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@DeleteMapping("{cod_prod}")
-	public void eliminar(@PathVariable int cod_prod) {
-		productoservice.eliminar(cod_prod);
+	@DeleteMapping("{idpro}")
+	public void eliminar(@PathVariable Long idpro) {
+		productoservice.eliminar(idpro);
 	}
 
 }
