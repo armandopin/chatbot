@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyecto.models.Categorias;
-import com.proyecto.models.Clientes;
 import com.proyecto.services.CategoriasServices;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -26,33 +25,33 @@ public class CategoriaRestController {
 
 	@Autowired
 	private CategoriasServices service;
-	
+
 	@GetMapping
-	public List<Categorias>listar(){
+	public List<Categorias> listar() {
 		return service.listar();
 	}
-	
+
 	@GetMapping("{idcat}")
 	public Categorias obtenerCategoria(@PathVariable Long idcli) {
 		return service.obtenerPorId(idcli).get();
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Object>registrar(@RequestBody Categorias categorias){
-	Categorias categoriaGuardado = service.registrar(categorias);
-	
-	URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idcat}")
-			.buildAndExpand(categoriaGuardado.getIdcat()).toUri();
+	public ResponseEntity<Object> registrar(@RequestBody Categorias categorias) {
+		Categorias categoriaGuardado = service.registrar(categorias);
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idcat}")
+				.buildAndExpand(categoriaGuardado.getIdcat()).toUri();
 		return ResponseEntity.created(location).build();
 	}
-	
+
 	@PutMapping("{idcli}")
-	public ResponseEntity<Object>actualizar(@RequestBody Categorias categorias, @PathVariable Long idcat){
+	public ResponseEntity<Object> actualizar(@RequestBody Categorias categorias, @PathVariable Long idcat) {
 		categorias.setIdcat(idcat);
 		service.actualizar(categorias);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@DeleteMapping("{idcli}")
 	public void eliminar(@PathVariable Long idcli) {
 		service.eliminar(idcli);

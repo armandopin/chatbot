@@ -19,7 +19,7 @@ public class ProveedoresController {
 	@Autowired
 	private ProveedoresServices proveedorservice;
 	
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String inicio() {	return "inicio";  }
 	
 	@GetMapping("/proveedor")
