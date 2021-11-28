@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="ISO-8859-1">
+
+<title>Insertar Producto</title>
+<th:block th:insert="fragments/resources"></th:block>
+
+</head>
+<body data-ma-theme="blue">
+	<th:block th:insert="fragments/header"></th:block>
+	<th:block th:insert="fragments/menu"></th:block>
+	<section class="content">
+		<div class="card">
+
+			<div class="card-body">
+
+				<h4 class="card-title">Nuevo Producto</h4>
+
+
+				<form th:action="@{/productos/crear}" th:method="post"
+					th:object="${producto}">
+					<div class="form-row">
+
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="inputDescrip">DESCRIPCION :</label>
+								<input type="text" th:field="*{descripcion}" class="form-control"
+									placeholder="Descripcion" maxlength="50"> <i
+									class="form-group__bar"></i>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="inputPrecio">PRECIO : </label>
+								<input type="text" th:field="*{precio}" class="form-control"
+									placeholder="Precio" maxlength="50"> <i
+									class="form-group__bar"></i>
+							</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inputCategoria">CATEGORIA :</label>
+								<select th:field="*{categorias.idcat}" class="form-control">
+									<option value="-1">Seleccione</option>
+									<option th:each="categorias : ${listarCategoria}"
+										th:value="${categorias.idcat}"
+										th:text="${categorias.descripcion}" />
+								</select>
+							</div>
+							</div>
+							
+							<div class="col-md-6">
+							<div class="form-group">
+								<label for="inputCategoria">PROVEEDOR :</label>
+								<select th:field="*{proveedores.idprov}" class="form-control">
+									<option value="-1">Seleccione</option>
+									<option th:each="proveedores : ${listarProveedores}"
+										th:value="${proveedores.idprov}"
+										th:text="${proveedores.razons}" />
+								</select>
+							</div>
+							</div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="inputStock">STOCK :</label>
+								<input type="text" th:field="*{stock}" class="form-control"
+									placeholder="Sotck" maxlength="50"> <i
+									class="form-group__bar"></i>
+							</div>
+						</div>		
+
+					</div>
+
+					<div class="form-row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Registrar</button>
+								<a href="/productos" class="btn btn-danger">Cancelar</a>
+							</div>
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+
+		</div>
+	</section>
+
+</body>
+</html>

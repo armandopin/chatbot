@@ -21,10 +21,7 @@ public class ClientesServicesImple implements ClientesServices{
 		return repository.save(clientes);
 	}
 
-	@Override
-	public Clientes actualizar(Clientes clientes) {
-		return repository.save(clientes);
-	}
+
 
 	@Override
 	public Integer eliminar(Long idcli) {
@@ -45,7 +42,11 @@ public class ClientesServicesImple implements ClientesServices{
 	public Optional<Clientes> obtenerPorId(Long idcli) {
 		return repository.findById(idcli);
 	}
-	
+	@Override
+	public Clientes insertaActualizaCliente(Clientes clientes) {
+		// TODO Auto-generated method stub
+		return repository.save(clientes);
+	}
 	
 
 }
