@@ -56,7 +56,7 @@ public class DetPedRestController {
 	@PutMapping("/actualizaDet") 
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualizaDetPed(@RequestBody DetallesPedidos obj) {
-
+ 
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			if (obj.getIddetped() == 0) {
