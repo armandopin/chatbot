@@ -53,7 +53,7 @@ public class DetPedRestController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("/actualizaDet")
+	@PutMapping("/actualizaDet") 
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualizaDetPed(@RequestBody DetallesPedidos obj) {
 
