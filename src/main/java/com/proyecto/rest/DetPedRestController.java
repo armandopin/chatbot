@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.models.DetallesPedidos;
-import com.proyecto.models.Productos;
 import com.proyecto.services.DetPedServices;
 import com.proyecto.utils.Constantes;
 

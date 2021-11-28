@@ -11,45 +11,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proyecto.models.Productos;
-import com.proyecto.services.ProductosServices;
+import com.proyecto.models.Venta;
+import com.proyecto.services.VentaService;
 import com.proyecto.utils.Constantes;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 @RestController
-@RequestMapping("/api/productos")
-public class ProductosRestController {
+@RequestMapping("/api/venta")
+public class VentaRestController {
 	
 	@Autowired
-	private ProductosServices productoservice;
+	private VentaService service;
 	
 	@GetMapping
-	public List<Productos> listaProductos(){
-		return productoservice.listar();
+	private List<Venta>listar(){
+		return service.listaVentas();
 	}
 	
-	@GetMapping("{idpro}")
-	public Productos obtenerProductos(@PathVariable Long idpro){
-		return productoservice.obtenerPorId(idpro).get();
+	@GetMapping("{idven}")
+	public Venta idVentas(@PathVariable Long idven) {
+		return service.obtenerPorId(idven).get();		
 	}
 	
 	@PostMapping("/registrar")
 	@ResponseBody
-	public ResponseEntity<Map<String,Object>>insertaProducto(@RequestBody Productos obj){
+	public ResponseEntity<Map<String,Object>>insertaVenta(@RequestBody Venta obj){
 		Map<String,Object> salida = new HashMap<>();
 		try {
-			Productos objSalida = productoservice.registrar(obj);
-			if(objSalida==null) {
-				
+			Venta objSalida =service.registraVenta(obj);
+			if(objSalida==null) {				
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			}else {
 				salida.put("mensaje", Constantes.MENSAJE_REG_EXITOSO);
-			}
-				
+			}		
 			
 		}catch (Exception e) {
 		 e.printStackTrace();
@@ -60,15 +59,15 @@ public class ProductosRestController {
 	
 	@PutMapping("/actualiza")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> actualizaProd(@RequestBody Productos obj) {
+	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Venta obj) {
 
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			if (obj.getIdpro() == 0) {
-				salida.put("mensaje", "El ID de la Producto debe ser diferente cero");
+			if (obj.getIdven() == 0) {
+				salida.put("mensaje", "El ID de la Sede debe ser diferente cero");
 				return ResponseEntity.ok(salida);
 			}
-			Productos objSalida = productoservice.actualizar(obj);
+			Venta objSalida = service.actualizaVenta(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			} else {
@@ -81,9 +80,10 @@ public class ProductosRestController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@DeleteMapping("{idpro}")
-	public void eliminar(@PathVariable Long idpro) {
-		productoservice.eliminar(idpro);
+	@DeleteMapping("{idven}")
+	public void eliminar(@PathVariable Long idven) {
+		service.eliminaVenta(idven);
 	}
+
 
 }

@@ -36,8 +36,8 @@ public class CategoriaRestController {
 
 	@GetMapping("{idcat}")
 	@ResponseBody
-	public Categorias obtenerCategoria(@PathVariable Long idcli) {
-		return service.obtenerPorId(idcli).get();
+	public Categorias obtenerCategoria(@PathVariable Long idcat) {
+		return service.obtenerPorId(idcat).get();
 	}
 	
 	@PostMapping("/registrar")
@@ -62,14 +62,13 @@ public class CategoriaRestController {
 	@PutMapping("/actualiza")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Categorias categoria) {
-
 		Map<String, Object> salida = new HashMap<>();
 		try {
 			if (categoria.getIdcat() == 0) {
 				salida.put("mensaje", "El ID de la Sede debe ser diferente cero");
 				return ResponseEntity.ok(salida);
 			}
-			Categorias objSalida = service.registrar(categoria);
+			Categorias objSalida = service.actualizar(categoria);
 			if (objSalida == null) {
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			} else {
