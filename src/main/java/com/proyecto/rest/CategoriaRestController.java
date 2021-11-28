@@ -81,9 +81,9 @@ public class CategoriaRestController {
 		return ResponseEntity.ok(salida);
 	}
 
-	@DeleteMapping("{idcli}")
+	@DeleteMapping("{idcat}")
 	@ResponseBody
-	public void eliminar(@PathVariable Long idcli) {
-		service.eliminar(idcli);
+	public void eliminar(@PathVariable Long idcat) {
+		service.eliminar(idcat);
 	}
 }
