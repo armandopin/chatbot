@@ -68,7 +68,7 @@ public class DetPedRestController {
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			} else {
 				salida.put("mensaje", Constantes.MENSAJE_ACT_EXITOSO);
-			}
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 			salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
