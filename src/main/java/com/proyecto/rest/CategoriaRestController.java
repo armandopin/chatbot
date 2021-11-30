@@ -25,14 +25,15 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/categorias")
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaRestController {
 
 	@Autowired
 	private CategoriasServices service;
 
-	@GetMapping
+	@GetMapping("/listarClientes")
 	@ResponseBody
+
 	public List<Categorias> listar() {
 		return service.listar();
 	}
