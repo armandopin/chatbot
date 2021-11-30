@@ -6,54 +6,49 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.proyecto.models.Clientes;
-import com.proyecto.services.ClientesServices;
+import com.proyecto.models.Venta;
+import com.proyecto.services.VentaService;
 import com.proyecto.utils.Constantes;
 
-@RestController
-@RequestMapping("/api/clientes")
-@CrossOrigin(origins = "http://localhost:4200")
-public class ClienteRestController {
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
+@RestController
+@RequestMapping("/api/venta")
+public class VentaRestController {
+	
 	@Autowired
-	private ClientesServices clientesservices;
+	private VentaService service;
 	
-	@GetMapping("/listarClientes")
-	public List<Clientes> listaPedidos(){
-		return clientesservices.listar();
+	@GetMapping
+	private List<Venta>listar(){
+		return service.listaVentas();
 	}
 	
-	@GetMapping("{idcli}")
-	public Clientes obtenerXClientes(@PathVariable Long idcli){
-		return clientesservices.obtenerPorId(idcli).get();
-		
+	@GetMapping("{idven}")
+	public Venta idVentas(@PathVariable Long idven) {
+		return service.obtenerPorId(idven).get();		
 	}
 	
-	@PostMapping("/registraCliente")
+	@PostMapping("/registrar")
 	@ResponseBody
-	public ResponseEntity<Map<String,Object>>insertaSede(@RequestBody Clientes obj){
+	public ResponseEntity<Map<String,Object>>insertaVenta(@RequestBody Venta obj){
 		Map<String,Object> salida = new HashMap<>();
 		try {
-			Clientes objSalida =clientesservices.registrar(obj);
-			if(objSalida==null) {
-				
+			Venta objSalida =service.registraVenta(obj);
+			if(objSalida==null) {				
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			}else {
 				salida.put("mensaje", Constantes.MENSAJE_REG_EXITOSO);
-			}
-				
+			}		
 			
 		}catch (Exception e) {
 		 e.printStackTrace();
@@ -62,18 +57,17 @@ public class ClienteRestController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	
-	@PutMapping("/actualizaCliente")
+	@PutMapping("/actualiza")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Clientes obj) {
+	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Venta obj) {
 
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			if (obj.getIdcli() == 0) {
+			if (obj.getIdven() == 0) {
 				salida.put("mensaje", "El ID de la Sede debe ser diferente cero");
 				return ResponseEntity.ok(salida);
 			}
-			Clientes objSalida = clientesservices.insertaActualizaCliente(obj);
+			Venta objSalida = service.actualizaVenta(obj);
 			if (objSalida == null) {
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			} else {
@@ -85,11 +79,11 @@ public class ClienteRestController {
 		}
 		return ResponseEntity.ok(salida);
 	}
-
 	
-	@DeleteMapping("{idcli}")
-	public void eliminar(@PathVariable Long idcli) {
-		clientesservices.eliminar(idcli);
+	@DeleteMapping("{idven}")
+	public void eliminar(@PathVariable Long idven) {
+		service.eliminaVenta(idven);
 	}
-	
+
+
 }

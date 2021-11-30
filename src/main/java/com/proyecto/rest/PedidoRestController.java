@@ -1,7 +1,8 @@
 package com.proyecto.rest;
 
-import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyecto.models.Pedidos;
 import com.proyecto.services.PedidosServices;
+import com.proyecto.utils.Constantes;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -37,20 +39,46 @@ public class PedidoRestController {
 		return pedidoservice.obtenerPorId(idped).get();
 	}
 	
-	@PostMapping
-	public ResponseEntity<Object>registrar(@RequestBody Pedidos pedidos){
-		Pedidos pedidoGuardado = pedidoservice.registrar(pedidos);
-		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idped}")
-				.buildAndExpand(pedidoGuardado.getClass()).toUri();
-		return ResponseEntity.created(location).build();
+	@PostMapping("/registrar")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>>insertaPedido(@RequestBody Pedidos obj){
+		Map<String,Object> salida = new HashMap<>();
+		try {
+			Pedidos objSalida =pedidoservice.registrar(obj);
+			if(objSalida==null) {				
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			}else {
+				salida.put("mensaje", Constantes.MENSAJE_REG_EXITOSO);
+			}			
+			
+		}catch (Exception e) {
+		 e.printStackTrace();
+		 salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
+		}
+		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("{idped}")
-	public ResponseEntity<Object>actualizar(@RequestBody Pedidos pedidos, @PathVariable Long idped){
-		pedidos.setIdped(idped);
-		pedidoservice.actualizar(pedidos);
-		return ResponseEntity.noContent().build();
+	@PutMapping("/actualiza")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Pedidos obj) {
+
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			if (obj.getIdped() == 0) {
+				salida.put("mensaje", "El ID de la Sede debe ser diferente cero");
+				return ResponseEntity.ok(salida);
+			}
+			Pedidos objSalida = pedidoservice.registrar(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			} else {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_EXITOSO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+		}
+		return ResponseEntity.ok(salida);
 	}
 	
 	@DeleteMapping("{idped}")

@@ -1,7 +1,8 @@
 package com.proyecto.rest;
 
-import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyecto.models.Productos;
 import com.proyecto.services.ProductosServices;
+import com.proyecto.utils.Constantes;
 
 @RestController
 @RequestMapping("/api/productos")
@@ -37,20 +39,48 @@ public class ProductosRestController {
 		return productoservice.obtenerPorId(idpro).get();
 	}
 	
-	@PostMapping
-	public ResponseEntity<Object>registrar(@RequestBody Productos productos){
-		Productos productoGuardado = productoservice.registrar(productos);
-		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idpro}")
-				.buildAndExpand(productoGuardado.getIdpro()).toUri();
-		return ResponseEntity.created(location).build();
+	@PostMapping("/registrar")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>>insertaProducto(@RequestBody Productos obj){
+		Map<String,Object> salida = new HashMap<>();
+		try {
+			Productos objSalida = productoservice.registrar(obj);
+			if(objSalida==null) {
+				
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			}else {
+				salida.put("mensaje", Constantes.MENSAJE_REG_EXITOSO);
+			}
+				
+			
+		}catch (Exception e) {
+		 e.printStackTrace();
+		 salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
+		}
+		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("{idpro}")
-	public ResponseEntity<Object>actualizar(@RequestBody Productos productos, @PathVariable Long idpro){
-		productos.setIdpro(idpro);
-		productoservice.actualizar(productos);
-		return ResponseEntity.noContent().build();
+	@PutMapping("/actualiza")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualizaProd(@RequestBody Productos obj) {
+
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			if (obj.getIdpro() == 0) {
+				salida.put("mensaje", "El ID de la Producto debe ser diferente cero");
+				return ResponseEntity.ok(salida);
+			}
+			Productos objSalida = productoservice.actualizar(obj);
+			if (objSalida == null) {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			} else {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_EXITOSO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+		}
+		return ResponseEntity.ok(salida);
 	}
 	
 	@DeleteMapping("{idpro}")

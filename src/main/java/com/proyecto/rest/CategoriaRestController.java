@@ -1,6 +1,5 @@
 package com.proyecto.rest;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +15,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyecto.models.Categorias;
 import com.proyecto.services.CategoriasServices;
+import com.proyecto.utils.Constantes;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/categorias")
+
 @CrossOrigin(origins = "http://localhost:4200")
+
 public class CategoriaRestController {
 
 	@Autowired
@@ -39,29 +40,55 @@ public class CategoriaRestController {
 	}
 
 	@GetMapping("{idcat}")
-	public Categorias obtenerCategoria(@PathVariable Long idcli) {
-		return service.obtenerPorId(idcli).get();
+	@ResponseBody
+	public Categorias obtenerCategoria(@PathVariable Long idcat) {
+		return service.obtenerPorId(idcat).get();
+	}
+	
+	@PostMapping("/registrar")
+	@ResponseBody
+	public ResponseEntity<Map<String,Object>>registrar(@RequestBody Categorias obj){
+		Map<String,Object> salida = new HashMap<>();
+		try {
+			Categorias objSalida =service.registrar(obj);
+			if(objSalida==null) {				
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			}else {
+				salida.put("mensaje", Constantes.MENSAJE_REG_EXITOSO);
+			}			
+			
+		}catch (Exception e) {
+		 e.printStackTrace();
+		 salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
+		}
+		return ResponseEntity.ok(salida);
+	}
+	
+	@PutMapping("/actualiza")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Categorias categoria) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			if (categoria.getIdcat() == 0) {
+				salida.put("mensaje", "El ID de la Sede debe ser diferente cero");
+				return ResponseEntity.ok(salida);
+			}
+			Categorias objSalida = service.actualizar(categoria);
+			if (objSalida == null) {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+			} else {
+				salida.put("mensaje", Constantes.MENSAJE_ACT_EXITOSO);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
+		}
+		return ResponseEntity.ok(salida);
 	}
 
-	@PostMapping
-	public ResponseEntity<Object> registrar(@RequestBody Categorias categorias) {
-		Categorias categoriaGuardado = service.registrar(categorias);
-
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idcat}")
-				.buildAndExpand(categoriaGuardado.getIdcat()).toUri();
-		return ResponseEntity.created(location).build();
-	}
-
-
-	@PutMapping("{idcli}")
-	public ResponseEntity<Object> actualizar(@RequestBody Categorias categorias, @PathVariable Long idcat) {
-		categorias.setIdcat(idcat);
-		service.actualizar(categorias);
-		return ResponseEntity.noContent().build();
-	}
-
-	@DeleteMapping("{idcli}")
-	public void eliminar(@PathVariable Long idcli) {
-		service.eliminar(idcli);
+	@DeleteMapping("{idcat}")
+	@ResponseBody
+	public void eliminar(@PathVariable Long idcat) {
+		service.eliminar(idcat);
 	}
 }
