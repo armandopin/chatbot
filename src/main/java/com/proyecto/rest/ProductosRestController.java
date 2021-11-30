@@ -58,4 +58,5 @@ public class ProductosRestController {
 		productoservice.eliminar(idpro);
 	}
 
+	
 }
