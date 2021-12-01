@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.proyecto.models.Categorias;
+
 import com.proyecto.models.Trabajador;
 import com.proyecto.services.TrabajadorService;
 import com.proyecto.utils.Constantes;
@@ -26,7 +26,7 @@ import com.proyecto.utils.Constantes;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/api/trabajador")
+@RequestMapping("/api/trabajadores")
 @CrossOrigin(origins = "http://localhost:4200")
 public class TrabajadorRestController {
 

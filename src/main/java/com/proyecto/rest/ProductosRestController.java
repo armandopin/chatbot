@@ -29,7 +29,7 @@ public class ProductosRestController {
 	@Autowired
 	private ProductosServices productoservice;
 	
-	@GetMapping("/listarProductos")
+	@GetMapping("/listaProductos")
 	public List<Productos> listaProductos(){
 		return productoservice.listar();
 	}
@@ -39,7 +39,7 @@ public class ProductosRestController {
 		return productoservice.obtenerPorId(idpro).get();
 	}
 	
-	@PostMapping("/registrar")
+	@PostMapping("/registraProductos")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>>insertaProducto(@RequestBody Productos obj){
 		Map<String,Object> salida = new HashMap<>();
@@ -60,7 +60,7 @@ public class ProductosRestController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("/actualiza")
+	@PutMapping("/actualizaProductos")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualizaProd(@RequestBody Productos obj) {
 

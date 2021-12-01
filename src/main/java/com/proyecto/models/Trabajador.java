@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "trabajador")
+@Table(name = "trabajadores")
 @Getter
 @Setter
 public class Trabajador{
@@ -35,12 +35,6 @@ public class Trabajador{
 	@Column(name = "telefono", length = 9)
 	private String telefono;
 	
-	@Column(name = "username",  length = 20)
-	private String username;
-	
-	@Column(name = "clave", length = 20)
-	private String clave;
-
 
 	
 }

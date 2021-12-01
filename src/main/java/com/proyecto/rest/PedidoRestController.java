@@ -29,17 +29,13 @@ public class PedidoRestController {
 	@Autowired
 	private PedidosServices pedidoservice;
 	
-	@GetMapping
+	@GetMapping("/listarPedido")
 	public List<Pedidos> listaPedidos(){
 		return pedidoservice.listar();
 	}
 	
-	@GetMapping("{idped}")
-	public Pedidos obtenerPedidos(@PathVariable Long idped){
-		return pedidoservice.obtenerPorId(idped).get();
-	}
 	
-	@PostMapping("/registrar")
+	@PostMapping("/registraPedido")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>>insertaPedido(@RequestBody Pedidos obj){
 		Map<String,Object> salida = new HashMap<>();
@@ -58,7 +54,7 @@ public class PedidoRestController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	@PutMapping("/actualiza")
+	@PutMapping("/actualizaPedido")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualiza(@RequestBody Pedidos obj) {
 

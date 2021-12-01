@@ -33,8 +33,8 @@ public class Pedidos {
 	private String descripcion;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "fec_pedido")
-	private LocalDate fecpedido;
+	@Column(name = "fecpedido")
+	private Date fecpedido;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fecEntrega")
