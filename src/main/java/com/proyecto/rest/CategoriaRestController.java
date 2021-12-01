@@ -33,7 +33,7 @@ public class CategoriaRestController {
 	@Autowired
 	private CategoriasServices service;
 
-	@GetMapping("/listarCategorias")
+	@GetMapping("/listarCategoria")
 	@ResponseBody
 	public List<Categorias> listar() {
 		return service.listar();
