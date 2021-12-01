@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.proyecto.models.Categorias;
 import com.proyecto.services.CategoriasServices;
 import com.proyecto.utils.Constantes;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/categorias")
@@ -32,7 +33,7 @@ public class CategoriaRestController {
 	@Autowired
 	private CategoriasServices service;
 
-	@GetMapping("/listarClientes")
+	@GetMapping("/listarCategorias")
 	@ResponseBody
 	public List<Categorias> listar() {
 		return service.listar();
@@ -44,7 +45,7 @@ public class CategoriaRestController {
 		return service.obtenerPorId(idcat).get();
 	}
 	
-	@PostMapping("/registrar")
+	@PostMapping("/registraCategoria")
 	@ResponseBody
 	public ResponseEntity<Map<String,Object>>registrar(@RequestBody Categorias obj){
 		Map<String,Object> salida = new HashMap<>();
