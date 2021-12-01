@@ -34,7 +34,6 @@ public class CategoriaRestController {
 
 	@GetMapping("/listarClientes")
 	@ResponseBody
-
 	public List<Categorias> listar() {
 		return service.listar();
 	}

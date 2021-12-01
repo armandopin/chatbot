@@ -47,17 +47,17 @@ public class Venta {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
 	
-	@Column(name = "tipocom", nullable = false, length = 20)
+	@Column(name = "tipocom", length = 20)
 	private String tipocom;
 
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Productos producto;
 	
-	@Column(name = "cantidad", nullable = false, length = 10)
+	@Column(name = "cantidad", length = 10)
 	private int cantidad;
 	
-	@Column(name = "preciov", nullable = false, length = 10)
+	@Column(name = "preciov", length = 10)
 	private double preciov;
 	
 }

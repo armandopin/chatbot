@@ -21,7 +21,7 @@ public class Productos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idpro;
 	
-	@Column(name = "descripcion", nullable = false, length = 200)
+	@Column(name = "descripcion", length = 200)
 	private String descripcion;
 	
 	@Column(name = "precio", precision = 10, scale = 2)

@@ -29,7 +29,7 @@ public class Pedidos {
 	@ManyToOne
 	private Clientes clientes;
 	
-	@Column(name = "descripcion", nullable = false, length = 200)
+	@Column(name = "descripcion", length = 200)
 	private String descripcion;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
